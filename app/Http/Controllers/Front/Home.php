@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Validator;
 //Models
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Contact;
 
 class Home extends Controller
 {
     public function __construct(){
       view()->share('pages',Page::orderBy('order','ASC')->get());
-  //    view()->share('categories',Category::inRandomOrder()->get());
+      view()->share('categories',Category::inRandomOrder()->get());
     }
     public function index(){
       $data['articles']=Article::orderBy('created_at','DESC')->paginate(2);
@@ -43,5 +45,19 @@ class Home extends Controller
       $data['page']=$page;
       return view('front.page',$data);
 
+    }
+
+    public function contact(){
+      return view('front.contact');
+    }
+
+    public function contactpost(Request $request){
+      $contact = new Contact;
+      $contact->name=$request->name;
+      $contact->email=$request->email;
+      $contact->topic=$request->topic;
+      $contact->message=$request->message;
+      $contact->save();
+      return redirect()->route('contact')->with('success','Mesajınız iletildi.');
     }
 }
