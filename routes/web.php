@@ -17,3 +17,4 @@ Route::get('/','Front\Home@index')->name('home');
 Route::get('sayfa','Front\Home@index');
 Route::get('/kategori/{category}','Front\Home@category')->name('category');
 Route::get('/{category}/{slug}','Front\Home@single')->name('single');
+Route::get('/{sayfa}','Front\Home@page')->name('page');
