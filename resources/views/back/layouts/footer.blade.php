@@ -65,6 +65,10 @@
 <script src="{{asset('back/')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset('back/')}}/js/demo/dataTables-demo.js"></script>
 
+@yield('js')
+@toastr_js
+@toastr_render
+
 </body>
 
 </html>
